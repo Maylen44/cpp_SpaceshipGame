@@ -10,8 +10,9 @@ public:
 	virtual ~EnemyShipTypeA() = default;
 
 	void update(sf::Clock& deltaTime) override;
-	void handleEvent(sf::Event& event) override;
+	void handleEvent(Status& eventStatus) override;
 	void draw(sf::RenderWindow& window) override;
+	void resetPositionWithin(sf::Vector2f& boundaries) override;
 
 private:
 	const sf::Color m_color;

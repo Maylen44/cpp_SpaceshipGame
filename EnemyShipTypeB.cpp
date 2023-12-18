@@ -14,11 +14,15 @@ void EnemyShipTypeB::update(sf::Clock& deltaTime)
 {
 }
 
-void EnemyShipTypeB::handleEvent(sf::Event& event)
+void EnemyShipTypeB::handleEvent(Status& eventStatus)
 {
 }
 
 void EnemyShipTypeB::draw(sf::RenderWindow& window)
 {
 	window.draw(m_shape);
+}
+
+void EnemyShipTypeB::resetPositionWithin(sf::Vector2f& boundaries)
+{
 }

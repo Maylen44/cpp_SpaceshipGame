@@ -13,6 +13,7 @@ public:
 	~Renderer() = default;
 	sf::Event& pollWindowEvent();
 	void const renderWholeContent(const std::vector<IGameObject*>& objects);
+	void resetWindowContents(const std::vector<IGameObject*>& objects);
 	void closeWindow();
 
 private:

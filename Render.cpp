@@ -25,6 +25,14 @@ void const Renderer::renderWholeContent(const std::vector<IGameObject*>& objects
 	m_window.display();
 }
 
+void Renderer::resetWindowContents(const std::vector<IGameObject*>& objects)
+{
+	for (auto& object : objects)
+	{
+		object->resetPositionWithin(m_windowResolution);
+	}
+}
+
 void Renderer::closeWindow()
 {
 	m_window.close();

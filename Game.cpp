@@ -30,6 +30,7 @@ void Game::initialize()
 	m_gameObjects.push_back(player);
 	m_gameObjects.push_back(enemy1);
 	m_gameObjects.push_back(enemy2);
+	m_renderer.resetWindowContents(m_gameObjects);
 }
 
 void Game::run()

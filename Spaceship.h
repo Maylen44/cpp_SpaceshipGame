@@ -3,14 +3,20 @@
 
 #include "IGameObject.h"
 
+enum MovementDirection
+{
+	Default = sf::Vector2f { 0, 0 },
+	Up = sf::Vector2f,
+	Down,
+	Left,
+	Right
+};
+
 class Spaceship : public IGameObject
 {
 public:
 	Spaceship();
 	virtual ~Spaceship() = default;
-
-	void draw(sf::RenderWindow& window) override;
-
 
 protected:
 	const sf::Vector2f m_size;
