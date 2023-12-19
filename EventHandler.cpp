@@ -13,7 +13,7 @@ static bool isRestartingGame(sf::Event& event)
 static bool isPlayerInputingCommands(sf::Event& event, Status& status)
 {
     bool result = false;
-    if (event.type == Keyrelease)
+    if (event.type == Keyrpressed)
     {
         switch (event.key.code)
         {
@@ -60,7 +60,7 @@ static bool isPlayerInputingCommands(sf::Event& event, Status& status)
     return result;
 }
 
-Status EventHandler::fetchEventStatus(sf::Event& windowPollEvent)
+Status EventHandler::fetchStatus(sf::Event& windowPollEvent)
 {
     Status tmp = Processing;
     if (isClossingGame(windowPollEvent))

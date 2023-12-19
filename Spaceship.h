@@ -3,15 +3,6 @@
 
 #include "IGameObject.h"
 
-enum MovementDirection
-{
-	Default = sf::Vector2f { 0, 0 },
-	Up = sf::Vector2f,
-	Down,
-	Left,
-	Right
-};
-
 class Spaceship : public IGameObject
 {
 public:
@@ -21,6 +12,7 @@ public:
 protected:
 	const sf::Vector2f m_size;
 	sf::RectangleShape m_shape;
+	const float m_passiveStriveSpeed;
 
 };
 

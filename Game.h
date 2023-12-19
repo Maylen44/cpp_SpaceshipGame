@@ -6,7 +6,7 @@
 #include "IGameObject.h"
 #include "Renderer.h"
 #include "EventHandler.h"
-
+#include "Updater.h"
 
 class Game
 {
@@ -20,16 +20,13 @@ public:
 	void reset();
 
 	//void spawn(IGameObject* gameObject, int numOfObjects = 1);
-	
 
 private:
-	void update();
-
 	bool m_isPlaying;
-	sf::Clock m_deltaTime;
 	std::vector<IGameObject*> m_gameObjects;
 	Renderer m_renderer;
 	EventHandler m_eventHandler;
+	Updater m_updater;
 };
 
 #endif //GAME_H

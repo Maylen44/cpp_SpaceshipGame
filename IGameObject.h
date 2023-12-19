@@ -10,7 +10,7 @@ public:
 	IGameObject() = default;
 	virtual ~IGameObject() = default;
 
-	virtual void update(sf::Clock& deltaTime) {};
+	virtual void update(const Status& eventStatus, const sf::Vector2f boundaries) {};
 	virtual void handleEvent(Status& eventStatus) {};
 	virtual void draw(sf::RenderWindow& window) {};
 	virtual void resetPositionWithin(sf::Vector2f& boundaries) {};

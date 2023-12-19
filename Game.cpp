@@ -14,10 +14,10 @@ static void clearObjects(std::vector<IGameObject*>& gameObjects)
 
 Game::Game()
 	: m_isPlaying(false)
-	, m_deltaTime()
 	, m_gameObjects()
 	, m_renderer()
 	, m_eventHandler()
+	, m_updater()
 {
 }
 
@@ -39,7 +39,7 @@ void Game::run()
 
 	while (m_isPlaying)
 	{
-		Status status = m_eventHandler.fetchEventStatus(m_renderer.pollWindowEvent());
+		Status status = m_eventHandler.fetchStatus(m_renderer.pollWindowEvent());
 
 		if (status == ClossingGame)
 		{
@@ -54,12 +54,8 @@ void Game::run()
 		}
 		else
 		{
-			if (status == MovingPlayerUp || status == MovingPlayerDown ||
-				status == MovingPlayerLeft || status == MovingPlayerRight ||
-				status == FiringPlayersMissile)
-			{
+			m_updater.update(m_gameObjects, status, m_renderer.m_windowResolution);
 
-			}
 		}
 		m_renderer.renderWholeContent(m_gameObjects);
 	}
@@ -76,10 +72,6 @@ void Game::reset()
 		m_gameObjects.push_back(gameObject);
 	}
 }*/
-
-void Game::update()
-{
-}
 
 
 
