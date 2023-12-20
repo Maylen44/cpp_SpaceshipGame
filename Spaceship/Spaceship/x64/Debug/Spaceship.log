@@ -1,42 +1,12 @@
-﻿  Render.cpp
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(5,57): warning C4244: аргумент: преобразование "T" в "unsigned int", возможна потеря данных
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(5,57): warning C4244:         with
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(5,57): warning C4244:         [
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(5,57): warning C4244:             T=float
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(5,57): warning C4244:         ]
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(5,35): warning C4244: аргумент: преобразование "T" в "unsigned int", возможна потеря данных
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(5,35): warning C4244:         with
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(5,35): warning C4244:         [
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(5,35): warning C4244:             T=float
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(5,35): warning C4244:         ]
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(8,42): warning C4244: аргумент: преобразование "const sf::Uint64" в "sf::Uint32", возможна потеря данных
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,107): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,107): warning C4244:         with
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,107): warning C4244:         [
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,107): warning C4244:             T=float
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,107): warning C4244:         ]
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,107): warning C4244:         and
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,107): warning C4244:         [
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,107): warning C4244:             T=int
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,107): warning C4244:         ]
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,85): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,85): warning C4244:         with
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,85): warning C4244:         [
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,85): warning C4244:             T=float
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,85): warning C4244:         ]
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,85): warning C4244:         and
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,85): warning C4244:         [
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,85): warning C4244:             T=int
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(12,85): warning C4244:         ]
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(80,20): warning C4244: инициализация: преобразование "T" в "float", возможна потеря данных
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(80,20): warning C4244:         with
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(80,20): warning C4244:         [
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(80,20): warning C4244:             T=unsigned int
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(80,20): warning C4244:         ]
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(81,21): warning C4244: инициализация: преобразование "T" в "float", возможна потеря данных
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(81,21): warning C4244:         with
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(81,21): warning C4244:         [
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(81,21): warning C4244:             T=unsigned int
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(81,21): warning C4244:         ]
-C:\Users\gena_\source\repos\Projekte\spaceship\Render.cpp(37): warning C4172: возвращение адреса локальной или временной переменной : pollRequest
+﻿  PlayerShip.cpp
+C:\Users\gena_\source\repos\Projekte\spaceship\PlayerShip.cpp(64,101): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
+C:\Users\gena_\source\repos\Projekte\spaceship\PlayerShip.cpp(64,101): warning C4244:         with
+C:\Users\gena_\source\repos\Projekte\spaceship\PlayerShip.cpp(64,101): warning C4244:         [
+C:\Users\gena_\source\repos\Projekte\spaceship\PlayerShip.cpp(64,101): warning C4244:             T=int
+C:\Users\gena_\source\repos\Projekte\spaceship\PlayerShip.cpp(64,101): warning C4244:         ]
+C:\Users\gena_\source\repos\Projekte\spaceship\PlayerShip.cpp(64,88): warning C4244: аргумент: преобразование "T" в "float", возможна потеря данных
+C:\Users\gena_\source\repos\Projekte\spaceship\PlayerShip.cpp(64,88): warning C4244:         with
+C:\Users\gena_\source\repos\Projekte\spaceship\PlayerShip.cpp(64,88): warning C4244:         [
+C:\Users\gena_\source\repos\Projekte\spaceship\PlayerShip.cpp(64,88): warning C4244:             T=int
+C:\Users\gena_\source\repos\Projekte\spaceship\PlayerShip.cpp(64,88): warning C4244:         ]
   Spaceship.vcxproj -> C:\Users\gena_\source\repos\Projekte\spaceship\Spaceship\x64\Debug\Spaceship.exe

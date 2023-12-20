@@ -18,12 +18,10 @@ public:
 
 	void resetBackground(sf::Sprite& sprite);
 
-
-
-	//need to fix it!
-	sf::Vector2f m_windowResolution;
+	sf::Vector2f& getResolution();
 
 private:
+	sf::Vector2f m_windowResolution;
 	sf::VideoMode m_windowMode;
 	const std::string m_windowTitel;
 	const sf::Uint64 m_windowStyle;

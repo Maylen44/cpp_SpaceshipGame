@@ -45,9 +45,8 @@ void const Renderer::renderWholeContent(const std::vector<IGameObject*>& objects
 	for (auto& sprite : m_backgroundSprites)
 	{
 		m_window.draw(sprite);
-
 		//sprite.move(0.0f, -0.1f);
-		sprite.move(-0.1f, 0.0f);
+		//sprite.move(-0.1f, 0.0f);
 		//sprite.move(-0.1f, -0.1f);
 		//sprite.move(0.0f, 0.0f);
 		resetBackground(sprite);
@@ -100,4 +99,9 @@ void Renderer::resetBackground(sf::Sprite& sprite)
 	{
 		sprite.setPosition(spriteX, spriteY - m_windowResolution.y * 2);
 	}
+}
+
+sf::Vector2f& Renderer::getResolution()
+{
+	return m_windowResolution;
 }

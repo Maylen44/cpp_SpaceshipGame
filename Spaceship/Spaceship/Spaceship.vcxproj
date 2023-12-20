@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\AssetsManager.cpp" />
     <ClCompile Include="..\..\EnemyShipTypeB.cpp" />
     <ClCompile Include="..\..\EnemyShipTypeA.cpp" />
     <ClCompile Include="..\..\EventHandler.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="..\..\Updater.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\AssetsManager.h" />
     <ClInclude Include="..\..\EnemyShipTypeA.h" />
     <ClInclude Include="..\..\EnemyShipTypeB.h" />
     <ClInclude Include="..\..\EventHandler.h" />

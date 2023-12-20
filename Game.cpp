@@ -3,13 +3,28 @@
 #include "EnemyShipTypeA.h"
 #include "EnemyShipTypeB.h"
 
-static void clearObjects(std::vector<IGameObject*>& gameObjects)
+static void clearObject(std::vector<IGameObject*>& objectsList, int objectID = -1)
 {
-	for (auto& object : gameObjects)
+	if (objectID == -1)
 	{
-		delete object;
+		for (auto& object : objectsList)
+		{
+			delete object;
+		}
+		objectsList.clear();
 	}
-	gameObjects.clear();
+
+	//need to work on it! doesnt work as wanted
+	/*
+	else if (objectID != -1)
+	{
+		if (objectID > -1)
+		{
+			objectsList.erase(objectsList.begin() + objectID);
+			objectsList.shrink_to_fit();
+		}
+	}*/
+
 }
 
 Game::Game()
@@ -18,18 +33,14 @@ Game::Game()
 	, m_renderer()
 	, m_eventHandler()
 	, m_updater()
-{
-}
+{}
 
 void Game::initialize()
 {
 	m_isPlaying = true;
-	PlayerShip* player = new PlayerShip();
-	EnemyShipTypeA* enemy1 = new EnemyShipTypeA();
-	EnemyShipTypeB* enemy2 = new EnemyShipTypeB();
-	m_gameObjects.push_back(player);
-	m_gameObjects.push_back(enemy1);
-	m_gameObjects.push_back(enemy2);
+	spawnObject(Player);
+	spawnObject(EnemyTypA, 3);
+	spawnObject(EnemyTypB, 2);
 	m_renderer.resetWindowContents(m_gameObjects);
 }
 
@@ -41,21 +52,19 @@ void Game::run()
 	{
 		Status status = m_eventHandler.fetchStatus(m_renderer.pollWindowEvent());
 
-		if (status == ClossingGame)
+		if (status == ClossingApplication)
 		{
 			m_isPlaying = false;
-			clearObjects(m_gameObjects);
+			clearObject(m_gameObjects);
 			m_renderer.closeWindow();
 		}
-		else if (status == RestartingGame)
+		else if (status == RestartingApplication)
 		{
-			clearObjects(m_gameObjects);
-			initialize();
+			reset();
 		}
 		else
 		{
-			m_updater.update(m_gameObjects, status, m_renderer.m_windowResolution);
-
+			m_updater.update(m_gameObjects, status, m_renderer.getResolution());
 		}
 		m_renderer.renderWholeContent(m_gameObjects);
 	}
@@ -63,15 +72,30 @@ void Game::run()
 
 void Game::reset()
 {
+	clearObject(m_gameObjects);
+	initialize();
 }
 
-/*void Game::spawn(IGameObject* gameObject, int numOfObjects)
+void Game::spawnObject(const GameObjectType& type, int numOfObjects)
 {
-	for (numOfObjects; numOfObjects > 0; --numOfObjects)
+	for (int i = 0; i < numOfObjects > 0; ++i)
 	{
-		m_gameObjects.push_back(gameObject);
+		if (type == Ship){}
+		else if (type == Player)
+		{
+			PlayerShip* player = new PlayerShip();
+			m_gameObjects.push_back(player);
+		}
+		else if (type == EnemyTypA)
+		{
+			EnemyShipTypeA* enemy1 = new EnemyShipTypeA();
+			m_gameObjects.push_back(enemy1);
+		}
+		else if (type == EnemyTypB)
+		{
+			EnemyShipTypeB* enemy2 = new EnemyShipTypeB();
+			m_gameObjects.push_back(enemy2);
+		}
+		else if (type == NotSpecified){}
 	}
-}*/
-
-
-
+}

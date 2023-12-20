@@ -5,3 +5,8 @@ Spaceship::Spaceship()
 	, m_shape(m_size)
 	, m_passiveStriveSpeed(1.0f)
 {}
+
+GameObjectType Spaceship::getObjectTyp()
+{
+	return Ship;
+}

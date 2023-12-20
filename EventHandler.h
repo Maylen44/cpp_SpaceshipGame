@@ -6,13 +6,18 @@
 enum Status
 {
 	Processing,
-	ClossingGame,
-	RestartingGame,
+	ClossingApplication,
+	RestartingApplication,
 	MovingPlayerUp,
 	MovingPlayerDown,
 	MovingPlayerLeft,
 	MovingPlayerRight,
-	FiringPlayersMissile
+	MovingPlayerUpLeftDiagonal,
+	MovingPlayerUpRightDiagonal,
+	MovingPlayerDownLeftDiagonal,
+	MovingPlayerDownRightDiagonal,
+	FiringPlayersMissile,
+	BoostingPlayersSpeed
 };
 
 enum Event
@@ -29,13 +34,11 @@ enum Event
 	A = sf::Keyboard::A,
 	Right = sf::Keyboard::Right,
 	D = sf::Keyboard::D,
+
 	Space = sf::Keyboard::Space,
-	/*UpAndLeft = sf::Keyboard::Up && sf::Keyboard::Left 
-	|| sf::Keyboard::W && sf::Keyboard::A
-	|| sf::Keyboard::W && sf::Keyboard::Left
-	|| sf::Keyboard::Up && sf::Keyboard::A,
-*/
-		
+	MouseLeft = sf::Mouse::Left,
+	MouseRight = sf::Mouse::Right,
+
 	ESC = sf::Keyboard::Escape,
 	R = sf::Keyboard::R
 };
@@ -46,6 +49,7 @@ public:
 	EventHandler() = default;
 	~EventHandler() = default;
 	Status fetchStatus(sf::Event& windowPollEvent);
+
 };
 
 #endif //EVENT_HANDLER_H

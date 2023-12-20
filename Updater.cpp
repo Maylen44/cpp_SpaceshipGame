@@ -3,10 +3,10 @@
 Updater::Updater()
 	: m_deltaClock()
 	, m_deltaTime(m_deltaClock.getElapsedTime())
-    , m_frameTime(0.0001f)
+    , m_frameTime(0.01f)
 {}
 
-void Updater::update(const std::vector<IGameObject*>& objects, const Status& eventStatus, const sf::Vector2f boundaries)
+void Updater::update(const std::vector<IGameObject*>& objects, const Status& eventStatus, const sf::Vector2f& boundaries)
 {
     m_deltaTime = m_deltaClock.getElapsedTime();
     if (m_deltaTime > sf::seconds(m_frameTime))
@@ -17,5 +17,4 @@ void Updater::update(const std::vector<IGameObject*>& objects, const Status& eve
         }
         m_deltaClock.restart();
     }
-
 }

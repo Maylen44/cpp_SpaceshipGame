@@ -19,9 +19,11 @@ public:
 	void run();
 	void reset();
 
-	//void spawn(IGameObject* gameObject, int numOfObjects = 1);
+	void spawnObject(const GameObjectType& type, int numOfObjects = 1);
 
 private:
+
+
 	bool m_isPlaying;
 	std::vector<IGameObject*> m_gameObjects;
 	Renderer m_renderer;

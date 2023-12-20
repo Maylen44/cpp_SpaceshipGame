@@ -9,6 +9,8 @@ public:
 	Spaceship();
 	virtual ~Spaceship() = default;
 
+	GameObjectType getObjectTyp() override;
+
 protected:
 	const sf::Vector2f m_size;
 	sf::RectangleShape m_shape;

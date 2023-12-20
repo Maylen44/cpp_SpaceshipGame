@@ -9,16 +9,21 @@ public:
 	PlayerShip();
 	virtual ~PlayerShip() = default;
 
-	void update(const Status& eventStatus, const sf::Vector2f boundaries) override;
+	void update(const Status& eventStatus, const sf::Vector2f& boundaries) override;
 	void handleEvent(Status& eventStatus) override;
 	void draw(sf::RenderWindow& window) override;
-	void resetPositionWithin(sf::Vector2f& boundaries) override;
+	void resetPositionWithin(const sf::Vector2f& boundaries) override;
 
+	GameObjectType getObjectTyp() override;
 
 private:
+	void handleRotation(sf::RenderWindow& window);
+
 	const sf::Color m_color;
 	int m_healthPoints;
-	float m_speed;
+	const float m_speed;
+	float m_rotationAngle;
+
 
 
 };
