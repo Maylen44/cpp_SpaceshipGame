@@ -1,12 +1,7 @@
 #include "Spaceship.h"
 
 Spaceship::Spaceship()
-	: m_size(20.f, 20.f)
-	, m_shape(m_size)
+	: m_size(60.f, 60.f)
+	, m_sprite()
 	, m_passiveStriveSpeed(1.0f)
 {}
-
-GameObjectType Spaceship::getObjectTyp()
-{
-	return Ship;
-}

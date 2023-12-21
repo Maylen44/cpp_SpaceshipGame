@@ -6,11 +6,12 @@
 
 enum GameObjectType
 {
-	Ship,
-	Player,
-	EnemyTypA,
-	EnemyTypB,
-	NotSpecified
+	BackgroundType,
+	ShipType,
+	PlayerType,
+	EnemyTypAType,
+	EnemyTypBType,
+	NotSpecifiedType
 };
 
 class IGameObject
@@ -23,8 +24,7 @@ public:
 	virtual void handleEvent(Status& eventStatus) {};
 	virtual void draw(sf::RenderWindow& window) {};
 	virtual void resetPositionWithin(const sf::Vector2f& boundaries) {};
-	virtual GameObjectType getObjectTyp() { return NotSpecified; };
-
+	virtual GameObjectType getObjectTyp() { return NotSpecifiedType; };
 };
 
 #endif //I_GAME_OBJECT_H

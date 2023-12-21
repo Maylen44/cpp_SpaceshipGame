@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Background.h"
 #include "PlayerShip.h"
 #include "EnemyShipTypeA.h"
 #include "EnemyShipTypeB.h"
@@ -33,15 +34,20 @@ Game::Game()
 	, m_renderer()
 	, m_eventHandler()
 	, m_updater()
-{}
+	, m_assetsManager()
+{
+	m_assetsManager.runManager();
+}
 
 void Game::initialize()
 {
 	m_isPlaying = true;
-	spawnObject(Player);
-	spawnObject(EnemyTypA, 3);
-	spawnObject(EnemyTypB, 2);
+	spawnObject(BackgroundType);
+	spawnObject(PlayerType);
+	spawnObject(EnemyTypAType, 3);
+	spawnObject(EnemyTypBType, 2);
 	m_renderer.resetWindowContents(m_gameObjects);
+	
 }
 
 void Game::run()
@@ -78,24 +84,29 @@ void Game::reset()
 
 void Game::spawnObject(const GameObjectType& type, int numOfObjects)
 {
-	for (int i = 0; i < numOfObjects > 0; ++i)
+	for (int i = 0; i < numOfObjects; ++i)
 	{
-		if (type == Ship){}
-		else if (type == Player)
+		if (type == ShipType){}
+		else if (type == BackgroundType)
 		{
-			PlayerShip* player = new PlayerShip();
+			Background* background = new Background(m_assetsManager.getTexture(type), m_renderer.getResolution());
+			m_gameObjects.push_back(background);
+		}
+		else if (type == PlayerType)
+		{
+			PlayerShip* player = new PlayerShip(m_assetsManager.getTexture(type));
 			m_gameObjects.push_back(player);
 		}
-		else if (type == EnemyTypA)
+		else if (type == EnemyTypAType)
 		{
-			EnemyShipTypeA* enemy1 = new EnemyShipTypeA();
+			EnemyShipTypeA* enemy1 = new EnemyShipTypeA(m_assetsManager.getTexture(type));
 			m_gameObjects.push_back(enemy1);
 		}
-		else if (type == EnemyTypB)
+		else if (type == EnemyTypBType)
 		{
-			EnemyShipTypeB* enemy2 = new EnemyShipTypeB();
+			EnemyShipTypeB* enemy2 = new EnemyShipTypeB(m_assetsManager.getTexture(type));
 			m_gameObjects.push_back(enemy2);
 		}
-		else if (type == NotSpecified){}
+		else if (type == NotSpecifiedType){}
 	}
 }

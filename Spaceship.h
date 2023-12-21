@@ -9,11 +9,11 @@ public:
 	Spaceship();
 	virtual ~Spaceship() = default;
 
-	GameObjectType getObjectTyp() override;
+	GameObjectType getObjectTyp() override { return ShipType; };
 
 protected:
 	const sf::Vector2f m_size;
-	sf::RectangleShape m_shape;
+	sf::Sprite m_sprite;
 	const float m_passiveStriveSpeed;
 
 };

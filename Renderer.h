@@ -1,7 +1,6 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <vector>
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "IGameObject.h"
@@ -16,9 +15,7 @@ public:
 	void resetWindowContents(const std::vector<IGameObject*>& objects);
 	void closeWindow();
 
-	void resetBackground(sf::Sprite& sprite);
-
-	sf::Vector2f& getResolution();
+	const sf::Vector2f& getResolution();
 
 private:
 	sf::Vector2f m_windowResolution;
@@ -26,8 +23,6 @@ private:
 	const std::string m_windowTitel;
 	const sf::Uint64 m_windowStyle;
 	sf::RenderWindow m_window;
-	sf::Texture m_backgroundTexture;
-	std::vector <sf::Sprite> m_backgroundSprites;
 };
 
 #endif //RENDERER_H

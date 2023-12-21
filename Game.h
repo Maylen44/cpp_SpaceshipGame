@@ -7,6 +7,7 @@
 #include "Renderer.h"
 #include "EventHandler.h"
 #include "Updater.h"
+#include "AssetsManager.h"
 
 class Game
 {
@@ -29,6 +30,7 @@ private:
 	Renderer m_renderer;
 	EventHandler m_eventHandler;
 	Updater m_updater;
+	AssetsManager m_assetsManager;
 };
 
 #endif //GAME_H

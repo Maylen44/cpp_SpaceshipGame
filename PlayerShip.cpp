@@ -1,6 +1,5 @@
 #include <cmath>
 #include "PlayerShip.h"
-#include <iostream>
 
 static float getAngle(float x1, float y1, float x2, float y2)
 {
@@ -22,20 +21,19 @@ static float getAngle(float x1, float y1, float x2, float y2)
 }
 
 
-PlayerShip::PlayerShip()
-	: m_color(sf::Color::Green)
-	, m_healthPoints(10)
+PlayerShip::PlayerShip(const sf::Texture& texture)
+	: m_healthPoints(10)
 	, m_speed(3.f)
-	, m_rotationAngle(m_shape.getRotation())
+	, m_rotationAngle(m_sprite.getRotation())
 {
-	m_shape.setOrigin(m_size.x / 2, m_size.x / 2);
-	m_shape.setFillColor(m_color);
+	m_sprite.setTexture(texture);
+	m_sprite.setTextureRect(sf::IntRect(0, 0, m_size.x, m_size.y));
+	m_sprite.setOrigin(m_size.x / 2, m_size.x / 2);
 }
 
 void PlayerShip::update(const Status& eventStatus, const sf::Vector2f& boundaries)
 {
-	m_shape.setRotation(m_rotationAngle);
-	std::cout << "f" << std::endl;
+	m_sprite.setRotation(m_rotationAngle);
 }
 
 void PlayerShip::handleEvent(Status& eventStatus)
@@ -45,21 +43,16 @@ void PlayerShip::handleEvent(Status& eventStatus)
 void PlayerShip::draw(sf::RenderWindow& window)
 {
 	handleRotation(window);
-	window.draw(m_shape);
+	window.draw(m_sprite);
 }
 
 void PlayerShip::resetPositionWithin(const sf::Vector2f& boundaries)
 {
-	m_shape.setPosition(boundaries.x / 2, boundaries.y / 2);
-}
-
-GameObjectType PlayerShip::getObjectTyp()
-{
-	return Player;
+	m_sprite.setPosition(boundaries.x / 2, boundaries.y / 2);
 }
 
 void PlayerShip::handleRotation(sf::RenderWindow& window)
 {
-	sf::Vector2i m_pos_new = sf::Mouse::getPosition(window);
-	m_rotationAngle = getAngle(m_shape.getPosition().x, m_shape.getPosition().y, m_pos_new.x, m_pos_new.y);
+	sf::Vector2i cursorPosition = sf::Mouse::getPosition(window);
+	m_rotationAngle = getAngle(m_sprite.getPosition().x, m_sprite.getPosition().y, cursorPosition.x, cursorPosition.y);
 }

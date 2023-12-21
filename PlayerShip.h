@@ -6,7 +6,7 @@
 class PlayerShip : public Spaceship
 {
 public:
-	PlayerShip();
+	PlayerShip(const sf::Texture& texture);
 	virtual ~PlayerShip() = default;
 
 	void update(const Status& eventStatus, const sf::Vector2f& boundaries) override;
@@ -14,12 +14,11 @@ public:
 	void draw(sf::RenderWindow& window) override;
 	void resetPositionWithin(const sf::Vector2f& boundaries) override;
 
-	GameObjectType getObjectTyp() override;
+	GameObjectType getObjectTyp() override { return PlayerType; };
 
 private:
 	void handleRotation(sf::RenderWindow& window);
 
-	const sf::Color m_color;
 	int m_healthPoints;
 	const float m_speed;
 	float m_rotationAngle;

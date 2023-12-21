@@ -6,7 +6,7 @@
 class EnemyShipTypeA : public Spaceship
 {
 public:
-	EnemyShipTypeA();
+	EnemyShipTypeA(const sf::Texture& texture);
 	virtual ~EnemyShipTypeA() = default;
 
 	void update(const Status& eventStatus, const sf::Vector2f& boundaries) override;
@@ -19,9 +19,8 @@ private:
 	void updateRotation(const sf::Vector2f& boundaries, sf::Vector2f& directionToMiddle, const float length);
 	void updateFollowBehavior(const sf::Vector2f& boundaries, const sf::Vector2f& directionToMiddle, const float length);
 	
-	GameObjectType getObjectTyp() override;
+	GameObjectType getObjectTyp() override { return EnemyTypAType; };
 
-	const sf::Color m_color;
 	int m_healthPoints;
 	const float m_speed;
 	const float m_ingameSpeed;
