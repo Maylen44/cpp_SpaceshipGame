@@ -1,29 +1,40 @@
 #ifndef EVENT_HANDLER_H
 #define EVENT_HANDLER_H
 
+#include <unordered_map>
 #include <SFML/Graphics.hpp>
 
-enum Status
+enum ApplicationStatus
 {
 	Processing,
 	ClossingApplication,
-	RestartingApplication,
-	MovingPlayerUp,
-	MovingPlayerDown,
-	MovingPlayerLeft,
-	MovingPlayerRight,
-	MovingPlayerUpLeftDiagonal,
-	MovingPlayerUpRightDiagonal,
-	MovingPlayerDownLeftDiagonal,
-	MovingPlayerDownRightDiagonal,
-	FiringPlayersMissile,
-	BoostingPlayersSpeed
+	RestartingApplication
 };
 
-enum Event
+enum KeyboardEvent
 {
-	Keyrelease = sf::Event::KeyReleased,
-	Keyrpressed = sf::Event::KeyPressed,
+	NoKeyboardInput,
+	MoveUp,
+	MoveDown,
+	MoveLeft,
+	MoveRight,
+	MoveUpLeft,
+	MoveUpRight,
+	MoveDownLeft,
+	MoveDownRight
+};
+
+enum MouseEvent
+{
+	NoMouseInput,
+	RightClick,
+	LeftClick,
+	RightAndLeftClick
+
+};
+
+enum InputEvent
+{
 	Closed = sf::Event::Closed,
 
 	Up = sf::Keyboard::Up,
@@ -48,7 +59,23 @@ class EventHandler
 public:
 	EventHandler() = default;
 	~EventHandler() = default;
-	Status fetchStatus(sf::Event& windowPollEvent);
+	ApplicationStatus fetchApplicationStatus(sf::Event& windowPollEvent);
+	KeyboardEvent fetchKeyboardEvent();
+	MouseEvent fetchMouseEvent();
+
+private:
+	void updateKeyboardState(sf::Event& event);
+	void updateMouseState(sf::Event& event);
+
+	bool isMousePressed(const InputEvent button);
+	bool areMousePressed(const InputEvent button1, const InputEvent button2);
+	bool isKeyPressed(InputEvent key);
+	bool areKeysPressed(InputEvent key1, InputEvent key2);
+	bool isClossingApplication(sf::Event& event);
+	bool isRestartingApplication();
+
+	std::unordered_map<InputEvent, bool> keyboardState;
+	std::unordered_map<InputEvent, bool> mouseState;
 
 };
 

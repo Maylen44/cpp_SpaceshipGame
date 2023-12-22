@@ -31,12 +31,14 @@ PlayerShip::PlayerShip(const sf::Texture& texture)
 	m_sprite.setOrigin(m_size.x / 2, m_size.x / 2);
 }
 
-void PlayerShip::update(const Status& eventStatus, const sf::Vector2f& boundaries)
+void PlayerShip::update(const KeyboardEvent& keyPress, const MouseEvent& mousePress, const sf::Vector2f& boundaries)
 {
+
 	m_sprite.setRotation(m_rotationAngle);
+
 }
 
-void PlayerShip::handleEvent(Status& eventStatus)
+void PlayerShip::handleEvent()
 {
 }
 

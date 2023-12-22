@@ -20,8 +20,8 @@ public:
 	IGameObject() = default;
 	virtual ~IGameObject() = default;
 
-	virtual void update(const Status& eventStatus, const sf::Vector2f& boundaries) {};
-	virtual void handleEvent(Status& eventStatus) {};
+	virtual void update(const KeyboardEvent& keyPress, const MouseEvent& mousePress, const sf::Vector2f& boundaries) {};
+	virtual void handleEvent() {};
 	virtual void draw(sf::RenderWindow& window) {};
 	virtual void resetPositionWithin(const sf::Vector2f& boundaries) {};
 	virtual GameObjectType getObjectTyp() { return NotSpecifiedType; };

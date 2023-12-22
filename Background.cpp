@@ -6,6 +6,7 @@ Background::Background(const sf::Texture& texture, const sf::Vector2f& boundarie
 	, m_scrollSpeed(0.3f)
 	, m_passiveStriveDirection(0.1f, 0.1f)
 	, m_passiveStriveSpeed(0.2f)
+	, m_boostMultiplier(2.0f)
 {
 	for (int i = 0; i < 4; ++i)
 	{
@@ -26,12 +27,12 @@ Background::Background(const sf::Texture& texture, const sf::Vector2f& boundarie
 	}
 }
 
-void Background::update(const Status& eventStatus, const sf::Vector2f& boundaries)
+void Background::update(const KeyboardEvent& keyPress, const MouseEvent& mousePress, const sf::Vector2f& boundaries)
 {
-	updateDuePlayerInputs(eventStatus);
+	updateDuePlayerInputs(keyPress, mousePress);
 }
 
-void Background::handleEvent(Status& eventStatus)
+void Background::handleEvent()
 {
 }
 
@@ -82,42 +83,48 @@ sf::Vector2f Background::rotateVector(const sf::Vector2f& vector, float angle)
 	return sf::Vector2f(x, y);
 }
 
-void Background::updateDuePlayerInputs(const Status& eventStatus)
+void Background::updateDuePlayerInputs(const KeyboardEvent& keyPress, const MouseEvent& mousePress)
 {
+	float ingameSpeed = m_scrollSpeed;
+	if (mousePress == RightClick || mousePress == RightAndLeftClick)
+	{
+		ingameSpeed *= m_boostMultiplier;
+	}
+
 	for (auto& sprite : m_backgroundSprites)
 	{
-		switch (eventStatus)
+		switch (keyPress)
 		{
-		case MovingPlayerUp:
-			sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y + m_scrollSpeed);
+		case MoveUp:
+			sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y + ingameSpeed);
 			m_passiveStriveDirection = { 0.0f, m_passiveStriveSpeed };
 			break;
-		case MovingPlayerDown:
-			sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y - m_scrollSpeed);
+		case MoveDown:
+			sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y - ingameSpeed);
 			m_passiveStriveDirection = { 0.0f, -m_passiveStriveSpeed };
 			break;
-		case MovingPlayerLeft:
-			sprite.setPosition(sprite.getPosition().x + m_scrollSpeed, sprite.getPosition().y);
+		case MoveLeft:
+			sprite.setPosition(sprite.getPosition().x + ingameSpeed, sprite.getPosition().y);
 			m_passiveStriveDirection = { m_passiveStriveSpeed, 0.0f };
 			break;
-		case MovingPlayerRight:
-			sprite.setPosition(sprite.getPosition().x - m_scrollSpeed, sprite.getPosition().y);
+		case MoveRight:
+			sprite.setPosition(sprite.getPosition().x - ingameSpeed, sprite.getPosition().y);
 			m_passiveStriveDirection = { -m_passiveStriveSpeed, 0.0f };
 			break;
-		case MovingPlayerUpLeftDiagonal:
-			sprite.setPosition(sprite.getPosition().x + m_scrollSpeed, sprite.getPosition().y + m_scrollSpeed);
+		case MoveUpLeft:
+			sprite.setPosition(sprite.getPosition().x + ingameSpeed, sprite.getPosition().y + ingameSpeed);
 			m_passiveStriveDirection = { m_passiveStriveSpeed, m_passiveStriveSpeed };
 			break;
-		case MovingPlayerUpRightDiagonal:
-			sprite.setPosition(sprite.getPosition().x - m_scrollSpeed, sprite.getPosition().y + m_scrollSpeed);
+		case MoveUpRight:
+			sprite.setPosition(sprite.getPosition().x - ingameSpeed, sprite.getPosition().y + ingameSpeed);
 			m_passiveStriveDirection = { -m_passiveStriveSpeed, m_passiveStriveSpeed };
 			break;
-		case MovingPlayerDownLeftDiagonal:
-			sprite.setPosition(sprite.getPosition().x + m_scrollSpeed, sprite.getPosition().y - m_scrollSpeed);
+		case MoveDownLeft:
+			sprite.setPosition(sprite.getPosition().x + ingameSpeed, sprite.getPosition().y - ingameSpeed);
 			m_passiveStriveDirection = { m_passiveStriveSpeed, -m_passiveStriveSpeed };
 			break;
-		case MovingPlayerDownRightDiagonal:
-			sprite.setPosition(sprite.getPosition().x - m_scrollSpeed, sprite.getPosition().y - m_scrollSpeed);
+		case MoveDownRight:
+			sprite.setPosition(sprite.getPosition().x - ingameSpeed, sprite.getPosition().y - ingameSpeed);
 			m_passiveStriveDirection = { -m_passiveStriveSpeed, -m_passiveStriveSpeed };
 			break;
 		default:

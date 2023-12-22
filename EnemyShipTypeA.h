@@ -9,21 +9,22 @@ public:
 	EnemyShipTypeA(const sf::Texture& texture);
 	virtual ~EnemyShipTypeA() = default;
 
-	void update(const Status& eventStatus, const sf::Vector2f& boundaries) override;
-	void handleEvent(Status& eventStatus) override;
+	void update(const KeyboardEvent& keyPress, const MouseEvent& mousePress, const sf::Vector2f& boundaries) override;
+	void handleEvent() override;
 	void draw(sf::RenderWindow& window) override;
 	void resetPositionWithin(const sf::Vector2f& boundaries) override;
 
 private:
-	void updateDuePlayerInputs(const Status& eventStatus);
+	void updateDuePlayerInputs(const KeyboardEvent& keyPress, const MouseEvent& mousePress);
 	void updateRotation(const sf::Vector2f& boundaries, sf::Vector2f& directionToMiddle, const float length);
 	void updateFollowBehavior(const sf::Vector2f& boundaries, const sf::Vector2f& directionToMiddle, const float length);
 	
 	GameObjectType getObjectTyp() override { return EnemyTypAType; };
 
 	int m_healthPoints;
+	const float m_baseSpeed;
 	const float m_speed;
-	const float m_ingameSpeed;
+	const float m_boostMultiplier;
 	float m_rotationSpeed;
 	const float m_reactionDelay;
 	const sf::Vector2f m_stopZoneRange;

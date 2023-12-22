@@ -3,6 +3,7 @@
 
 #include <map>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "IGameObject.h"
 
 class AssetsManager
@@ -10,17 +11,14 @@ class AssetsManager
 public:
 	AssetsManager();
 	~AssetsManager() = default;
-	void const runManager();
-	const void playSong(); //NEED to change argument!
+	void const playSFX(int soundID);//change argument to status or something!
+
 	const sf::Texture& getTexture(const GameObjectType& type);
 
 private:
-	void const loadTextures();
-
-
 	std::map<GameObjectType, sf::Texture> m_textures;
-	//std::map<GameObjectType, sf::Music> m_songs;
-	//sf::Music m_song1;
+	sf::SoundBuffer laserSFXBuffer, laserHitSFXBuffer;
+	sf::Sound laserSFX, laserHitSFX;
 
 };
 

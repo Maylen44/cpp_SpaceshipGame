@@ -5,8 +5,9 @@
 
 EnemyShipTypeA::EnemyShipTypeA(const sf::Texture& texture)
 	: m_healthPoints(1)
-	, m_speed(1.0f)
-	, m_ingameSpeed(m_passiveStriveSpeed + m_speed)
+	, m_baseSpeed(1.0f)
+	, m_speed(m_passiveStriveSpeed + m_baseSpeed)
+	, m_boostMultiplier(2.0f)
 	, m_rotationSpeed(0.01f)
 	, m_reactionDelay(2.0f)
 	, m_stopZoneRange(100.0f, 150.0f)
@@ -19,16 +20,16 @@ EnemyShipTypeA::EnemyShipTypeA(const sf::Texture& texture)
 	m_sprite.setOrigin(m_size.x / 2, 0);
 }
 
-void EnemyShipTypeA::update(const Status& eventStatus, const sf::Vector2f& boundaries)
+void EnemyShipTypeA::update(const KeyboardEvent& keyPress, const MouseEvent& mousePress, const sf::Vector2f& boundaries)
 {
-	updateDuePlayerInputs(eventStatus);
+	updateDuePlayerInputs(keyPress, mousePress);
 	sf::Vector2f directionToMiddle = sf::Vector2f(boundaries.x / 2, boundaries.y / 2) - m_sprite.getPosition();
 	float length = std::sqrt(directionToMiddle.x * directionToMiddle.x + directionToMiddle.y * directionToMiddle.y);
 	updateRotation(boundaries, directionToMiddle, length);
 	updateFollowBehavior(boundaries, directionToMiddle, length);
 }
 
-void EnemyShipTypeA::handleEvent(Status& eventStatus)
+void EnemyShipTypeA::handleEvent()
 {
 }
 
@@ -54,33 +55,39 @@ void EnemyShipTypeA::resetPositionWithin(const sf::Vector2f& boundaries)
 	m_sprite.setPosition(spawnPosition.x, spawnPosition.y);
 }
 
-void EnemyShipTypeA::updateDuePlayerInputs(const Status& eventStatus)
+void EnemyShipTypeA::updateDuePlayerInputs(const KeyboardEvent& keyPress, const MouseEvent& mousePress)
 {
-	switch (eventStatus)
+	float ingameSpeed = m_speed;
+	if (mousePress == RightClick || mousePress == RightAndLeftClick)
 	{
-	case MovingPlayerUp:
-		m_sprite.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y + m_ingameSpeed);
+		ingameSpeed *= m_boostMultiplier;
+	}
+
+	switch (keyPress)
+	{
+	case MoveUp:
+		m_sprite.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y + ingameSpeed);
 		break;
-	case MovingPlayerDown:
-		m_sprite.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y - m_ingameSpeed);
+	case MoveDown:
+		m_sprite.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y - ingameSpeed);
 		break;
-	case MovingPlayerLeft:
-		m_sprite.setPosition(m_sprite.getPosition().x + m_ingameSpeed, m_sprite.getPosition().y);
+	case MoveLeft:
+		m_sprite.setPosition(m_sprite.getPosition().x + ingameSpeed, m_sprite.getPosition().y);
 		break;
-	case MovingPlayerRight:
-		m_sprite.setPosition(m_sprite.getPosition().x - m_ingameSpeed, m_sprite.getPosition().y);
+	case MoveRight:
+		m_sprite.setPosition(m_sprite.getPosition().x - ingameSpeed, m_sprite.getPosition().y);
 		break;
-	case MovingPlayerUpLeftDiagonal:
-		m_sprite.setPosition(m_sprite.getPosition().x + m_ingameSpeed, m_sprite.getPosition().y + m_ingameSpeed);
+	case MoveUpLeft:
+		m_sprite.setPosition(m_sprite.getPosition().x + ingameSpeed, m_sprite.getPosition().y + ingameSpeed);
 		break;
-	case MovingPlayerUpRightDiagonal:
-		m_sprite.setPosition(m_sprite.getPosition().x - m_ingameSpeed, m_sprite.getPosition().y + m_ingameSpeed);
+	case MoveUpRight:
+		m_sprite.setPosition(m_sprite.getPosition().x - ingameSpeed, m_sprite.getPosition().y + ingameSpeed);
 		break;
-	case MovingPlayerDownLeftDiagonal:
-		m_sprite.setPosition(m_sprite.getPosition().x + m_ingameSpeed, m_sprite.getPosition().y - m_ingameSpeed);
+	case MoveDownLeft:
+		m_sprite.setPosition(m_sprite.getPosition().x + ingameSpeed, m_sprite.getPosition().y - ingameSpeed);
 		break;
-	case MovingPlayerDownRightDiagonal:
-		m_sprite.setPosition(m_sprite.getPosition().x - m_ingameSpeed, m_sprite.getPosition().y - m_ingameSpeed);
+	case MoveDownRight:
+		m_sprite.setPosition(m_sprite.getPosition().x - ingameSpeed, m_sprite.getPosition().y - ingameSpeed);
 		break;
 	default:
 		break;
@@ -112,7 +119,7 @@ void EnemyShipTypeA::updateFollowBehavior(const sf::Vector2f& boundaries, const 
 	//retreate back to safezone
 	if (length < m_stopZoneRange.x)
 	{
-		m_sprite.setPosition(m_sprite.getPosition() - directionToMiddle / (m_ingameSpeed * m_reactionDelay));
+		m_sprite.setPosition(m_sprite.getPosition() - directionToMiddle / (m_speed * m_reactionDelay));
 	}
 	//rotate clockwise or anti clockwise in safe zone
 	else if (length < m_stopZoneRange.y)
@@ -120,18 +127,18 @@ void EnemyShipTypeA::updateFollowBehavior(const sf::Vector2f& boundaries, const 
 		float angle = std::atan2(directionToMiddle.y, directionToMiddle.x);
 		if (m_sprite.getPosition().x > boundaries.x / 2)
 		{
-			angle += m_speed;
+			angle += m_baseSpeed;
 		}
 		else
 		{
-			angle -= m_speed;
+			angle -= m_baseSpeed;
 		}
 		sf::Vector2f circularMotion(std::cos(angle), std::sin(angle));
-		m_sprite.setPosition(m_sprite.getPosition() - circularMotion / (m_ingameSpeed * m_reactionDelay));
+		m_sprite.setPosition(m_sprite.getPosition() - circularMotion / (m_speed * m_reactionDelay));
 	}
 	//move towards middle
 	else
 	{
-		m_sprite.setPosition(m_sprite.getPosition() + directionToMiddle / (m_ingameSpeed * m_reactionDelay));
+		m_sprite.setPosition(m_sprite.getPosition() + directionToMiddle / (m_speed * m_reactionDelay));
 	}
 }

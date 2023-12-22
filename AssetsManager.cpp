@@ -2,27 +2,8 @@
 
 AssetsManager::AssetsManager()
 	: m_textures()
-	//, m_songs()
-	//, m_song1()
-{}
-
-void const AssetsManager::runManager()
 {
-	loadTextures();
-}
-
-const void AssetsManager::playSong()
-{
-	
-}
-
-const sf::Texture& AssetsManager::getTexture(const GameObjectType& type)
-{
-	return m_textures[type];
-}
-
-void const AssetsManager::loadTextures()
-{
+	//Texture initialization
 	sf::Texture error, background, playerShip, enemyAShip, enemyBShip;
 
 	error.loadFromFile("failsafe.png");
@@ -36,4 +17,23 @@ void const AssetsManager::loadTextures()
 	m_textures[PlayerType] = playerShip;
 	m_textures[EnemyTypAType] = enemyAShip;
 	m_textures[EnemyTypBType] = enemyBShip;
+
+
+	//SFX initialization
+	laserSFXBuffer.loadFromFile("laser10.wav");
+	laserHitSFXBuffer.loadFromFile("tir.mp3");
+
+	laserSFX.setBuffer(laserSFXBuffer);
+	laserHitSFX.setBuffer(laserHitSFXBuffer);
+
+}
+
+void const AssetsManager::playSFX(int soundID)
+{
+	laserSFX.play();
+}
+
+const sf::Texture& AssetsManager::getTexture(const GameObjectType& type)
+{
+	return m_textures[type];
 }

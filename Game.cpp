@@ -35,9 +35,7 @@ Game::Game()
 	, m_eventHandler()
 	, m_updater()
 	, m_assetsManager()
-{
-	m_assetsManager.runManager();
-}
+{}
 
 void Game::initialize()
 {
@@ -56,7 +54,9 @@ void Game::run()
 
 	while (m_isPlaying)
 	{
-		Status status = m_eventHandler.fetchStatus(m_renderer.pollWindowEvent());
+		ApplicationStatus status = m_eventHandler.fetchApplicationStatus(m_renderer.pollWindowEvent());
+		KeyboardEvent keyboardEvent = m_eventHandler.fetchKeyboardEvent();
+		MouseEvent mouseEvent = m_eventHandler.fetchMouseEvent();
 
 		if (status == ClossingApplication)
 		{
@@ -66,12 +66,16 @@ void Game::run()
 		}
 		else if (status == RestartingApplication)
 		{
+			/*
+			if (m_updater.getSFXTime() > sf::seconds(1.0f))
+			{
+				m_assetsManager.playSFX(0);
+				m_updater.restartSFXclock();
+			}
+			*/
 			reset();
 		}
-		else
-		{
-			m_updater.update(m_gameObjects, status, m_renderer.getResolution());
-		}
+		m_updater.update(m_gameObjects, keyboardEvent, mouseEvent, m_renderer.getResolution());
 		m_renderer.renderWholeContent(m_gameObjects);
 	}
 }

@@ -9,8 +9,8 @@ public:
 	PlayerShip(const sf::Texture& texture);
 	virtual ~PlayerShip() = default;
 
-	void update(const Status& eventStatus, const sf::Vector2f& boundaries) override;
-	void handleEvent(Status& eventStatus) override;
+	void update(const KeyboardEvent& keyPress, const MouseEvent& mousePress, const sf::Vector2f& boundaries) override;
+	void handleEvent() override;
 	void draw(sf::RenderWindow& window) override;
 	void resetPositionWithin(const sf::Vector2f& boundaries) override;
 
